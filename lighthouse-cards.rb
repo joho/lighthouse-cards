@@ -35,6 +35,16 @@ class Ticket
 
 end
 
+class Array
+  def in_chunks_of(size_of_chunks)
+    if size_of_chunks >= length
+      [self]
+    else
+      [self[0, size_of_chunks]] + self[size_of_chunks, length].in_chunks_of(size_of_chunks)
+    end
+  end
+end
+
 get '/' do
   @tickets = Ticket.all
   haml :index

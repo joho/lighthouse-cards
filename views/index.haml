@@ -1,17 +1,19 @@
-.wrapper
-  - @tickets.each do |t|
-    .ticket
-      .ticket_title
-        = t.title
-      .meta
-        .value
-          .box
-          %span{ :class => 'metatxt' }
-            effort
-        .effort
-          .box
-          %span{ :class => 'metatxt' }
-            value
-      .ticket_number
-        = "\##{t.id}"
+- @tickets.in_chunks_of(8).each do |chunk_of_tickets|
+  .wrapper
+    - chunk_of_tickets.each do |t|
+      .ticket
+        .ticket_title
+          = t.title
+        .meta
+          .value
+            .box
+            %span{ :class => 'metatxt' }
+              effort
+          .effort
+            .box
+            %span{ :class => 'metatxt' }
+              value
+        .ticket_number
+          = "\##{t.id}"
+  %br
 
