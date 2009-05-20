@@ -1,7 +1,17 @@
-.ticket
+.wrapper
   - @tickets.each do |t|
-    .ticket_title
-      = t.title
-    .ticket_number
-      = "\##{t.id}"
+    .ticket
+      .ticket_title
+        = t.title
+      .meta
+        .value
+          .box
+          %span{ :class => 'metatxt' }
+            effort
+        .effort
+          .box
+          %span{ :class => 'metatxt' }
+            value
+      .ticket_number
+        = "\##{t.id}"
 
