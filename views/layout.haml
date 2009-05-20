@@ -1,6 +1,8 @@
 %html{html_attrs('en-AU')}
   %head
     %title Lighthouse Cards
-    %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/styles.css' }
+    %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/styles.css', :media => 'screen' }
+    %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/styles.css', :media => 'print' }
+    %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/print.css', :media => 'print' }
   %body
     = yield

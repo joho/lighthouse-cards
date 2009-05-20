@@ -1,7 +1,21 @@
+.hide_printed
+  %h1
+    All Open, Unprinted tickets in Lighthouse
+  %p
+    This is showing all open tickets that aren't tagged with 'card-printed'
+  %form{ :action => '/mark_printed', :method => 'post' }
+    %input{ :type => 'submit', :value => 'Tag all as printed' }
+  %br
+  %form{ :action => '/print_specific', :method => 'post' }
+    %input{ :type => 'text', :name => 'ticket_ids', :value => 'Tag all as printed' }
+    %input{ :type => 'submit', :value => 'Print Specific IDs' }
 - @tickets.in_chunks_of(8).each do |chunk_of_tickets|
   .wrapper
     - chunk_of_tickets.each do |t|
       .ticket
+        <!--
+        = t.inspect
+        !-->
         .ticket_title
           = t.title
         .meta
@@ -16,4 +30,3 @@
         .ticket_number
           = "\##{t.id}"
   %br
-
