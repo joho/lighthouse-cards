@@ -1,4 +1,4 @@
-- @tickets.enum_slice(8).each do |chunk_of_tickets|
+- @tickets.each_slice(8) do |chunk_of_tickets|
   .wrapper
     - chunk_of_tickets.each do |t|
       .ticket
