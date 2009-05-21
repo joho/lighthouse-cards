@@ -15,8 +15,9 @@ auth_token: blahblahblah12341234
 
 TODO:
 ---
-  * put the nice stylesheet in that stu is working on
   * make it smart enough to only print cards that haven't been printed
+  * make the search query dynamic
+  * stop using safari only selectors so it looks nice
   
 ---
 

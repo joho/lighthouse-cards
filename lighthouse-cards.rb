@@ -63,7 +63,6 @@ class Array
 end
 
 get '/' do
-  @tickets = Ticket.all
   haml :index
 end
 
@@ -71,7 +70,11 @@ post '/print_specific' do
   ticket_ids = params[:ticket_ids].split(',').collect {|id| id.to_i}
   @tickets = Ticket.all.select {|ticket| ticket_ids.include?(ticket.id.to_i)}
   
-  haml :index
+  haml :cards
+end
+
+get '/print_all' do
+  @tickets = Ticket.all
 end
 
 post '/mark_printed' do
