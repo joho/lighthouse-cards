@@ -2,6 +2,7 @@ require 'rubygems'
 require 'sinatra'
 require 'hpricot'
 require 'open-uri'
+require 'enumerator'
 
 class Ticket
   attr_reader :id, :title, :tags
@@ -50,16 +51,6 @@ class Ticket
     end
   end
 
-end
-
-class Array
-  def in_chunks_of(size_of_chunks)
-    if size_of_chunks >= length
-      [self]
-    else
-      [self[0, size_of_chunks]] + self[size_of_chunks, length].in_chunks_of(size_of_chunks)
-    end
-  end
 end
 
 get '/' do
