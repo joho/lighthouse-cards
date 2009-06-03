@@ -64,6 +64,13 @@ post '/print_specific' do
   haml :cards
 end
 
+post '/print_greater_than' do
+  ticket_id = params[:ticket_id].to_i
+  @tickets = Ticket.all.select {|ticket| ticket.id.to_i >= ticket_id }
+  
+  haml :cards
+end
+
 get '/print_all' do
   @tickets = Ticket.all
 end

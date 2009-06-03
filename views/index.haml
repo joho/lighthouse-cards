@@ -11,3 +11,7 @@
 %form{ :action => '/print_specific', :method => 'post' }
   %input{ :type => 'text', :name => 'ticket_ids' }
   %input{ :type => 'submit', :value => 'Print Specific IDs' }
+%br
+%form{ :action => '/print_greater_than', :method => 'post' }
+  %input{ :type => 'text', :name => 'ticket_id' }
+  %input{ :type => 'submit', :value => 'Print Tickets greater than X' }
