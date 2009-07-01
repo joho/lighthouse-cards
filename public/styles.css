@@ -1,3 +1,7 @@
+.page_break {
+  page-break-before: always;
+}
+
 .wrapper {
   height: 29.7cm;
   width: 21cm;
@@ -7,7 +11,7 @@
 .ticket {
   position: relative;
   float: left;
-  height: 7.425cm;
+  height: 7cm;
   width: 10.449cm;
   border-bottom: 2px dashed #cacaca;
 }
