@@ -1,17 +1,51 @@
 %h1
-  All Open, Unprinted tickets in Lighthouse
-%p
-  This is showing all open tickets that aren't tagged with 'card-printed'
-%p
-  %a{ :href => '/print_all' }
-    print all
-%form{ :action => '/mark_printed', :method => 'post' }
-  %input{ :type => 'submit', :value => 'Tag all as printed' }
-%br
-%form{ :action => '/print_specific', :method => 'post' }
-  %input{ :type => 'text', :name => 'ticket_ids' }
-  %input{ :type => 'submit', :value => 'Print Specific IDs' }
-%br
-%form{ :action => '/print_greater_than', :method => 'post' }
-  %input{ :type => 'text', :name => 'ticket_id' }
-  %input{ :type => 'submit', :value => 'Print Tickets greater than X' }
+  Magic Lighthouse index card printer!
+
+%form{ :action => '/print', :method => 'post' }
+  - if @show_config
+    %fieldset
+      %legend
+        Your lighthouse config
+      
+      %label{ :for => 'auth_key' }
+        lighthouse API key
+      %input{ :type => 'text', :name => 'auth_key' }
+      %br
+    
+      %label{ :for => 'account_name' }
+        Account Name
+      %input{ :type => 'text', :name => 'account_name' }
+      %br
+    
+      %label{ :for => 'project_key' }
+        Project Key
+      %input{ :type => 'text', :name => 'project_key' }
+      %br
+    
+      %label{ :for => 'save_config' }
+        Save your config to a cookie to save you using this form?
+      %br
+      %input{ :type => 'radio', :name => 'save_config', :value => 'true' }
+        Yes
+      %input{ :type => 'radio', :name => 'save_config', :value => 'false' }
+        no
+  - else
+    %a{ :href => '/?show_config=true' }
+      Let me change my config
+  %fieldset
+    %legend
+      Show me some tickets! (leave both fields empty to show all)
+    %label{ :for => 'ticket_ids' }
+      Comma separated ticket ids (if you want specific ones)
+    %input{ :type => 'text', :name => 'ticket_ids' }
+    %br
+  
+    %label{ :for => 'tickets_greater_than' }
+      Show all tickets newer than this one
+    %input{ :type => 'text', :name => 'tickets_greater_than' }
+    %br
+  
+  %input{ :type => 'submit', :value => 'Show Tickets!' }
+
+    
+
