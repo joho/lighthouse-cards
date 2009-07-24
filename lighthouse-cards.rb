@@ -1,4 +1,5 @@
 require 'rubygems'
+require 'haml'
 require 'sinatra'
 require 'hpricot'
 require 'open-uri'
