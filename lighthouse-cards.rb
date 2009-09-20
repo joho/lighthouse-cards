@@ -40,6 +40,11 @@ class Ticket
 
 end
 
+helpers do
+  include Rack::Utils
+  alias_method :h, :escape_html
+end
+
 get '/' do
   @show_config = !session[:auth_key] || params[:show_config]
   haml :index
