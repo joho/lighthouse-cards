@@ -22,7 +22,7 @@ class Ticket
     query = options[:query] || 'state:open'
 
     url = "http://#{account_name}.lighthouseapp.com/projects/#{project_key}/tickets.xml?q=#{query}&_token=#{token}&page=#{page_num}"
-    Hpricot(open(url))
+    Hpricot.XML(open(url))
   end
   
   def self.all(options = {}, current_page = 1)
