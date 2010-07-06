@@ -1,3 +1,7 @@
+body {
+  font-family: Helvetica, sans-serif;
+}
+
 .page_break {
   page-break-before: always;
 }
@@ -23,7 +27,6 @@
   margin: 0.4cm;
   margin-top: 0.2cm;
   font-size: 1cm;
-  font-family: Helvetica, serif;
   font-weight: bold;
 }
 
@@ -45,7 +48,6 @@
 }
 
 .metatxt {
-  font-family: Helvetica, serif;
   text-align: center;
   margin-left: 10px;
 }

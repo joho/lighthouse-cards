@@ -4,6 +4,7 @@ require 'sinatra'
 require 'hpricot'
 require 'open-uri'
 require 'enumerator'
+require 'lighthouse-api'
 
 use Rack::Session::Cookie, :key => 'rack.session',
                            :expire_after => 60 * 60 * 24 * 365 # a year
@@ -67,4 +68,25 @@ post '/print' do
   end
   
   haml :cards
+end
+
+get '/dashboard' do
+  Lighthouse.account = session[:account_name]
+  Lighthouse.token = session[:auth_key]
+  
+  project = Lighthouse::Project.find(:all).detect { |p| p.id == session[:account_name].to_i }
+  @open_ticket_count = project.open_tickets_count
+  
+  num_pages = (@open_ticket_count / 30).to_i + (@open_ticket_count % 30 == 0 ? 0 : 1)
+  # num_pages = 1
+  @tickets = (1..num_pages).inject([]) {|tickets, page_num| tickets + project.tickets(:q => 'state:open', :page => page_num)}
+  
+  @ticket_ages_in_days = @tickets.collect { |t| ((Time.now - t.created_at) / 60 / 60 / 24).to_i }.sort
+  @ticket_ages_in_weeks = @ticket_ages_in_days.map { |age_in_days| age_in_days / 7 }
+  
+  @tickets_by_age_week = (1..@ticket_ages_in_weeks.max).collect do |unique_age|
+    @ticket_ages_in_weeks.count {|age| unique_age == age }
+  end
+  
+  haml :dashboard
 end

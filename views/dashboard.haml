@@ -1,0 +1,59 @@
+%dl
+  %dt
+    Open Tickets
+  %dd
+    = @open_ticket_count
+  %dt
+    Oldest Ticket
+  %dd
+    = "#{@ticket_ages_in_days.max} days old"
+  %dt
+    Newest Ticket
+  %dd
+    = "#{@ticket_ages_in_days.min} days old"
+  %dt
+    Average Ticket Age
+  %dd
+    = "#{(@ticket_ages_in_days.inject(0.0) { |sum, el| sum + el } / @ticket_ages_in_days.size).to_i} days old"
+
+%script{ :type => 'text/javascript' }
+  = "var ticket_age_by_week = [#{@tickets_by_age_week.join(',')}];"
+
+:javascript
+  
+  window.onload = function () {
+      var r = Raphael(30, 200, 1200, 580),
+          fin = function () {
+              this.flag = r.g.popup(this.bar.x, this.bar.y, this.bar.value || "0").insertBefore(this);
+          },
+          fout = function () {
+              this.flag.animate({opacity: 0}, 300, function () {this.remove();});
+          },
+          fin2 = function () {
+              var y = [], res = [];
+              for (var i = this.bars.length; i--;) {
+                  y.push(this.bars[i].y);
+                  res.push(this.bars[i].value || "0");
+              }
+              this.flag = r.g.popup(this.bars[0].x, Math.min.apply(Math, y), res.join(", ")).insertBefore(this);
+          },
+          fout2 = function () {
+              this.flag.animate({opacity: 0}, 300, function () {this.remove();});
+          };
+
+      r.g.txtattr.font = "32px Helvetica, sans-serif";
+      r.g.text(300, 40, "Number of Tickets X weeks old");
+      
+      var ticket_age_graph_width = 1150;
+      var ticket_age_graph_height = 500;
+      var ticket_age_graph_x_pos = 10;
+      var ticket_age_graph_y_pos = 10;
+      
+      r.g.barchart(ticket_age_graph_x_pos, ticket_age_graph_y_pos, ticket_age_graph_width, ticket_age_graph_height, [ticket_age_by_week]).hover(fin, fout);
+
+      var horizontal_spacing = (ticket_age_graph_width - ticket_age_graph_x_pos) / ticket_age_by_week.length;      
+      r.g.txtattr.font = (horizontal_spacing / 2) + "px Helvetica, sans-serif";
+      for (var i = 1; i <= ticket_age_by_week.length; i++) {
+        r.g.text(ticket_age_graph_x_pos + (i * (horizontal_spacing - 1)) , ticket_age_graph_height + 15, i + "weeks").rotate(45, true);
+      }
+  };
