@@ -85,7 +85,7 @@ get '/dashboard' do
   @ticket_ages_in_weeks = @ticket_ages_in_days.map { |age_in_days| age_in_days / 7 }
   
   @tickets_by_age_week = (1..@ticket_ages_in_weeks.max).collect do |unique_age|
-    @ticket_ages_in_weeks.count {|age| unique_age == age }
+    @ticket_ages_in_weeks.select {|age| unique_age == age }.size
   end
   
   haml :dashboard
