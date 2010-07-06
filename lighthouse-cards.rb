@@ -74,7 +74,7 @@ get '/dashboard' do
   Lighthouse.account = session[:account_name]
   Lighthouse.token = session[:auth_key]
   
-  project = Lighthouse::Project.find(:all).detect { |p| p.id == session[:account_name].to_i }
+  project = Lighthouse::Project.find(session[:project_key])
   @open_ticket_count = project.open_tickets_count
   
   num_pages = (@open_ticket_count / 30).to_i + (@open_ticket_count % 30 == 0 ? 0 : 1)
