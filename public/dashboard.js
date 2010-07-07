@@ -49,3 +49,25 @@ function setupTicketsByAgeGraph() {
   // reset the font for the hovers etc
   r.g.txtattr.font = "14px Helvetica, sans-serif";
 }
+
+function setupResolvedTicketsGraph() {
+  var c = Raphael('tickets-resolved-by-fortnight');
+  
+  var resolved_ticket_graph_container = $('div#ticket-age-graph');
+  var resolved_ticket_graph_width = resolved_ticket_graph_container.width() - 50;
+  var resolved_ticket_graph_height = resolved_ticket_graph_container.height() - 50;
+  // ticket_resolution_by_fortnight
+  // ticket_completion_rates_by_fortnight
+  var lines = c.g.linechart(10, 10, resolved_ticket_graph_width, resolved_ticket_graph_height, 
+                      [1, 2, 3, 4, 5],
+                      [ticket_resolution_by_fortnight, ticket_completion_rates_by_fortnight],
+                      {nostroke: false, axis: "0 0 1 1", symbol: "o"}).hoverColumn(function () {
+                      this.tags = c.set();
+                      for (var i = 0, ii = this.y.length; i < ii; i++) {
+                          this.tags.push(c.g.tag(this.x, this.y[i], this.values[i], 160, 10).insertBefore(this).attr([{fill: "#fff"}, {fill: this.symbols[i].attr("fill")}]));
+                      }
+                  }, function () {
+                      this.tags && this.tags.remove();
+                  });
+  
+}

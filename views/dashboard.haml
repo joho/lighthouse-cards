@@ -32,14 +32,46 @@
   #ticket-age-graph
 
 .yui-g
+  %div{ :class => 'yui-g first'}
+    %div{ :class => 'yui-u first'}
+      .data-box
+        %h4
+          Tickets Resolved Past 2 Weeks
+        %h3
+          = @resolved_ticket_stats.total_resolved_last_fortnight
+    .yui-u
+      .data-box
+        %h4
+          Completion Rate Past 2 Weeks
+        %h3
+          = "#{@resolved_ticket_stats.average_completion_rate_last_fortnight} days"
+  .yui-g
+    %div{ :class => 'yui-u first'}
+      .data-box
+        %h4
+          Tickets Resolved Past 10 Weeks
+        %h3
+          = @resolved_ticket_stats.total_resolved_over_ten_weeks
+    .yui-u
+      .data-box
+        %h4
+          Completion Rate Past 10 Weeks
+        %h3
+          = "#{@resolved_ticket_stats.average_completion_rate_over_ten_weeks} days"
+
+.yui-g
   %h2
     Resolved Tickets By Fortnight
   #tickets-resolved-by-fortnight
+  
 %script{ :type => 'text/javascript' }
   = "var ticket_age_by_week = [#{@open_ticket_stats.num_tickets_by_age_in_weeks.join(',')}];"
+  = "var ticket_resolution_by_fortnight = [#{@resolved_ticket_stats.total_tickets_resolved_by_fortnight.join(',')}];"
+  = "var ticket_completion_rates_by_fortnight = [#{@resolved_ticket_stats.average_completion_rate_by_fortnight.join(',')}];"
 
 :javascript
   
   window.onload = function () {
-      setupTicketsByAgeGraph()
+      setupTicketsByAgeGraph();
+      setupResolvedTicketsGraph();
   };

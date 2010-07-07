@@ -1,6 +1,9 @@
 class OpenTicketStats
-  def initialize(open_tickets)
-    @open_tickets = open_tickets
+  def initialize(project)
+    open_ticket_count = project.open_tickets_count
+    # paginate through and collect all open tickets from lighthouse
+    num_pages = (open_ticket_count / 30).to_i + (open_ticket_count % 30 == 0 ? 0 : 1)
+    @open_tickets = (1..num_pages).inject([]) {|tickets, page_num| tickets + project.tickets(:q => 'state:open', :page => page_num)}
   end
   
   def number_of_open_tickets

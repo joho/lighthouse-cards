@@ -2,4 +2,4 @@ require 'sinatra'
 
 set :env,       :production
 require 'lighthouse-cards'
-run Sinatra.application
+run Sinatra::Application

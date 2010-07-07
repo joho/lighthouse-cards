@@ -5,12 +5,14 @@ require 'hpricot'
 require 'open-uri'
 require 'enumerator'
 require 'lighthouse-api'
+require 'active_support'
 
 use Rack::Session::Cookie, :key => 'rack.session',
                            :expire_after => 60 * 60 * 24 * 365 # a year
 
 require 'models/ticket'
 require 'models/open_ticket_stats'
+require 'models/resolved_ticket_stats'
 
 helpers do
   include Rack::Utils
@@ -53,13 +55,11 @@ get '/dashboard' do
   Lighthouse.token = session[:auth_key]
   
   project = Lighthouse::Project.find(session[:project_key])
-  open_ticket_count = project.open_tickets_count
-  
-  # paginate through and collect all open tickets from lighthouse
-  num_pages = (open_ticket_count / 30).to_i + (open_ticket_count % 30 == 0 ? 0 : 1)
-  open_tickets = (1..num_pages).inject([]) {|tickets, page_num| tickets + project.tickets(:q => 'state:open', :page => page_num)}
 
-  @open_ticket_stats = OpenTicketStats.new(open_tickets)
+
+  @open_ticket_stats = OpenTicketStats.new(project)
+  
+  @resolved_ticket_stats = ResolvedTicketStats.new(project)
   
   haml :dashboard
 end

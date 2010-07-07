@@ -8,6 +8,12 @@ div#ticket-age-graph {
   border-bottom: solid 1px black;
 }
 
+div#tickets-resolved-by-fortnight {
+  width: 100%;
+  height: 500px;
+  border-bottom: solid 1px black;
+}
+
 div.data-box {
   text-align: center;
   border-bottom: solid 1px black;
