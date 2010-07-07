@@ -51,6 +51,13 @@ get '/' do
   haml :index
 end
 
+post '/store_config_in_session' do
+  [:auth_key, :account_name, :project_key].each do |config_key|
+    session[config_key] = params[config_key]
+  end
+  redirect '/'
+end
+
 post '/print' do
   options = {}
   [:auth_key, :account_name, :project_key, :query].each do |search_option|
@@ -67,7 +74,7 @@ post '/print' do
     @tickets = @tickets.select {|ticket| ticket.id.to_i >= ticket_id }
   end
   
-  haml :cards
+  haml :cards, :layout => false
 end
 
 get '/dashboard' do

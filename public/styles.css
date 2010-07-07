@@ -2,67 +2,13 @@ body {
   font-family: Helvetica, sans-serif;
 }
 
-.page_break {
-  page-break-before: always;
-}
-
-.wrapper {
-  width: 21cm;
-  height: 29.7cm;
-}
-
-.ticket {
-  position: relative;
-  float: left;
-  height: 7cm;
-  width: 10.449cm;
-  border-bottom: 2px dashed #cacaca;
-}
-
-.ticket:nth-child(2n+1) {
-  border-right: 2px dashed #cacaca;
-}
-
-.ticket_title {
-  margin: 0.4cm;
-  margin-top: 0.2cm;
-  font-size: 1cm;
-  font-weight: bold;
-}
-
-.meta {
-  position: absolute;
+div#ticket-age-graph {
   width: 100%;
-  bottom: 0px;
+  height: 500px;
+  border-bottom: solid 1px black;
 }
 
-.value {
-  float: left;
-  margin: 0.1cm;
-  margin-left: 0.5cm;
-}
-
-.effort {
-  float: left;
-  margin: 0.1cm;
-}
-
-.metatxt {
+div.data-box {
   text-align: center;
-  margin-left: 10px;
-}
-
-.box {
-  width: 1.5cm;
-  height: 1.5cm;
-  border: 2px solid #a1a1a1;
-}
-
-.ticket_number {
-  position: absolute;
-  right: 0.8cm;
-  bottom: 0.7cm;
-  font-size: 1cm;
-  padding: 0.2cm;
-  border: 2px dotted #c1c1c1;
+  border-bottom: solid 1px black;
 }

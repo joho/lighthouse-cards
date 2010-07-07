@@ -1,29 +1,31 @@
-- first_group = true
-- @tickets.each_slice(8) do |chunk_of_tickets|
-  - unless first_group
-    .page_break 
-  - first_group = false
-  .wrapper
-    - chunk_of_tickets.each do |t|
-      .ticket
-        <!--
-        = t.inspect
-        !-->
-        .ticket_title
-          = h(t.title)
-        .meta
-          .value
-            .box
-            %span{ :class => 'metatxt' }
-              effort
-          .value
-            .box
-            %span{ :class => 'metatxt' }
-              plan
-          .effort
-            .box
-            %span{ :class => 'metatxt' }
-              value
-        .ticket_number
-          = "\##{t.id}"
-  %br
+!!! 5
+%html{html_attrs('en-AU')}
+  %head
+    %title Lighthouse Cards
+    %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/print.css' }
+   %body
+    - @tickets.each_slice(8) do |chunk_of_tickets|
+      .wrapper
+        - chunk_of_tickets.each do |t|
+          .ticket
+            <!--
+            = t.inspect
+            !-->
+            .ticket_title
+              = h(t.title)
+            .meta
+              .value
+                .box
+                %span{ :class => 'metatxt' }
+                  effort
+              .value
+                .box
+                %span{ :class => 'metatxt' }
+                  plan
+              .effort
+                .box
+                %span{ :class => 'metatxt' }
+                  value
+            .ticket_number
+              = "\##{t.id}"
+      %br

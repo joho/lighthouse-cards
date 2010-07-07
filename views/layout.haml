@@ -1,12 +1,20 @@
+!!! 5
 %html{html_attrs('en-AU')}
   %head
     %title Lighthouse Cards
+    %link{ :rel => 'stylesheet', :type => 'text/css', :href => 'http://yui.yahooapis.com/2.8.1/build/fonts/fonts-min.css' }
+    %link{ :rel => 'stylesheet', :type => 'text/css', :href => 'http://yui.yahooapis.com/2.8.1/build/grids/grids-min.css' }
     %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/styles.css', :media => 'screen' }
-    %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/styles.css', :media => 'print' }
-    %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/print.css', :media => 'print' }
+    %script{ :src => 'http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js', :type => 'text/javascript', :charset => 'utf-8' }
     %script{ :src => '/raphael-min.js', :type => 'text/javascript', :charset => 'utf-8' }
     %script{ :src => '/g.raphael-min.js', :type => 'text/javascript', :charset => 'utf-8' }
     %script{ :src => '/g.bar-min.js', :type => 'text/javascript', :charset => 'utf-8' }
     %script{ :src => '/g.line-min.js', :type => 'text/javascript', :charset => 'utf-8' }
   %body
-    = yield
+    %div{ :id => 'doc', :class => 'yui-t7' }
+      %div{ :id => 'hd', :role => 'banner' }
+        %h1
+          = @heading || "JB's Lighthouse Dashboard"
+      %div{ :id => 'bd', :role => 'main' }
+        = yield
+      %div{ :id => 'ft', :roler => 'contentinfo' }
