@@ -3,7 +3,7 @@
   %head
     %title Lighthouse Cards
     %link{ :rel => 'stylesheet', :type => 'text/css', :href => '/print.css' }
-   %body
+  %body
     - @tickets.each_slice(8) do |chunk_of_tickets|
       .wrapper
         - chunk_of_tickets.each do |t|
