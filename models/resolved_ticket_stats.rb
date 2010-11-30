@@ -5,7 +5,7 @@ class ResolvedTicketStats
     page_num = 1
     tickets_retrieved = nil
     while(page_num == 1 || tickets_retrieved.size == 30) do
-      tickets_retrieved = project.tickets(:q => "state:resolved updated:'10 weeks ago'", :page => page_num)
+      tickets_retrieved = project.tickets(:q => "state:deployed state:fixed updated:'10 weeks ago'", :page => page_num)
       @resolved_tickets += tickets_retrieved
       page_num += 1
     end
